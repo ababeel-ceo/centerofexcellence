@@ -1,3 +1,4 @@
+'use client'
 import { useState } from "react";
 
 export default function LoginPage() {
@@ -16,13 +17,11 @@ export default function LoginPage() {
           <div className="input-controls">
             <input type="text" className="controls" placeholder="Password" />
           </div>
-          <div className="input-controls">
-            {/* <input type="submit" name="" id=""  className=""/> */}
+          <div className="input-controls"> 
             <button className="sbt-btn">Submit</button>
           </div>
-          <p style={{ padding: "5px" }}>
-            {" "}
-            Don't have an account <u onClick={()=>setLogin(false)}>Register here</u>
+          <p style={{ padding: "5px" }}> 
+            Don't have an account <u onClick={()=>setLogin(false)} className="pointer">Register here</u>
           </p>
         </form>
       </div> :
@@ -46,7 +45,7 @@ export default function LoginPage() {
           </div>
           <p style={{ padding: "5px" }}>
             {" "}
-            Already registered <u onClick={()=>setLogin(true)}>Login here</u>
+            Already registered <u onClick={()=>setLogin(true)} className="pointer">Login here</u>
           </p>
         </form>
       </div>}

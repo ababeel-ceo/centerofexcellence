@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useSnapshot } from "valtio";
 import { globalState } from "./store/globalStore";
 import Link from "next/link"; 

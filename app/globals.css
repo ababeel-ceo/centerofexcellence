@@ -17,6 +17,9 @@ color texzt  : #EFEAF7 */
   --tx-color : #FFFFFF;
 }
 
+.pointer{
+  cursor: pointer;
+}
 .primary-clr{
   background-color: var(--prm-clr);
   color: white;

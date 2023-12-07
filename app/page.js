@@ -1,13 +1,8 @@
-'use client' 
-import { useRouter } from 'next/navigation'
+'use client'  
 import LandingPage from './LandingPage';
 
 export default function coe() {
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push('/coe');
-  };
+ 
 
   return (
     <LandingPage/>
