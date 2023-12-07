@@ -36,7 +36,7 @@ const Sample = () => {
           <ul class="navbar-nav">
             {tabs.map((tab, i) => {
               return(
-              <li class="nav-item" onClick={()=>handleActiveTab(tab,i) }><a class={globaSnap.activeTab === i ? "nav-link active" : "nav-link"} aria-current={globaSnap.activeTab === i ? "page":""} href="#">{tab}</a></li>)
+              <li key={i} class="nav-item" onClick={()=>handleActiveTab(tab,i) }><a class={globaSnap.activeTab === i ? "nav-link active" : "nav-link"} aria-current={globaSnap.activeTab === i ? "page":""} href="#">{tab}</a></li>)
             })}
           </ul>
         </div>
