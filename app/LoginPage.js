@@ -20,9 +20,7 @@ export default function LoginPage() {
           <div className="input-controls"> 
             <button className="sbt-btn">Submit</button>
           </div>
-          <p style={{ padding: "5px" }}> 
-            Don't have an account <u onClick={()=>setLogin(false)} className="pointer">Register here</u>
-          </p>
+          <p style={{ padding: "5px" }}> Don't have an account <u onClick={()=>setLogin(false)} className="pointer">Register here</u>  </p>
         </form>
       </div> :
       <div className="back"> 
