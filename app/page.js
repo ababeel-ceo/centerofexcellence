@@ -1,9 +1,20 @@
 'use client';
-import {useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import Confetti from "react-confetti"; 
+import {useState } from "react"; 
 import LoginPage from "./LoginPage";
+import dynamic from "next/dynamic";
+
+if(typeof window !== 'undefined' && typeof window.navigator !== 'undefined'){
+  import ("react-quill/dist/quill.snow.css"); 
+}
+
+
+
+const Confetti = dynamic(()=>{
+  return import('react-confetti')
+},{ssr:false})
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+
 
 export default function LandingPage() {
   const [value, setValue] = useState("");
@@ -19,8 +30,8 @@ export default function LandingPage() {
       {!openEditor ? (
         <div className="lp-container">
           <Confetti
-            width={window.innerWidth}
-            height={window.innerHeight}
+            width={2000}
+            height={2000}
             recycle={new Date().getSeconds() === next ? 1 : 0}
           />
           <div className="lp-nav"> 
@@ -44,7 +55,7 @@ export default function LandingPage() {
                 width="16"
                 height="16"
                 fill="currentColor"
-                class="bi bi-search search-icon"
+                className="bi bi-search search-icon"
                 viewBox="0 0 16 16"
               >
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
@@ -58,7 +69,7 @@ export default function LandingPage() {
                     width="16"
                     height="16"
                     fill="currentColor"
-                    class="bi bi-grip-vertical"
+                    className="bi bi-grip-vertical"
                     viewBox="0 0 16 16"
                   >
                     <path d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
