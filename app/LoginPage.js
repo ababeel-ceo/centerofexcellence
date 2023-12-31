@@ -1,21 +1,55 @@
 'use client'
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation'
+import { globalAction, globalState } from "./store/globalStore";
+import { useSnapshot } from "valtio";
 
 export default function LoginPage() {
+
+    const snap = useSnapshot(globalState);
     const [login, setLogin] = useState(true);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState("");
+    const router = useRouter()
+ 
+    useEffect(()=>{
+      if(snap.isAuthenticate){
+        router.push('/coe');
+       }
+    },[snap.isAuthenticate])
+    const handleSubmit=async (e)=>{
+      e.preventDefault(); 
+     if(username && password){
+      await globalAction.login(username, password);
+      setLogin(true);
+     }
+   
+    }
+
+    const handleRegister =async (e)=>{
+      e.preventDefault();
+      try{
+        await globalAction.createUser(username, password, name);
+       
+      }catch(error){
+        alert("Error")
+      }
+      
+    }
   return (
     <>
       <div className="login-container"></div>
      {(login) ?  <div className="front"> 
-        <form className="inputs">
-          <div className="input-controls text-center">
+        <form className="inputs" onSubmit={handleSubmit}>
+          <div className="input-controls text-center" >
             <h3>Login</h3>
           </div>
           <div className="input-controls">
-            <input type="text" className="controls" placeholder="Username" />
+            <input type="text" className="controls" name="user" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
           </div>
           <div className="input-controls">
-            <input type="text" className="controls" placeholder="Password" />
+            <input type="text" className="controls" name="pass" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
           </div>
           <div className="input-controls"> 
             <button className="sbt-btn">Submit</button>
@@ -29,17 +63,17 @@ export default function LoginPage() {
             <h3>Sign-up</h3>
           </div>
           <div className="input-controls">
-            <input type="text" className="controls" placeholder="Name" />
+            <input type="text" className="controls" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)}/>
           </div>
           <div className="input-controls">
-            <input type="text" className="controls" placeholder="Username" />
+            <input type="text" className="controls" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
           </div>
           <div className="input-controls">
-            <input type="text" className="controls" placeholder="Password" />
+            <input type="text" className="controls" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
           </div>
           <div className="input-controls">
             {/* <input type="submit" name="" id=""  className=""/> */}
-            <button className="sbt-btn">Register</button>
+            <button onClick={(e)=>handleRegister(e)} className="sbt-btn">Register</button>
           </div>
           <p style={{ padding: "5px" }}>
             {" "}

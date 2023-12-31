@@ -80,7 +80,7 @@ export default function LandingPage() {
             </section>
           )}
           <section className="editor-section">
-            {!openEditor ? (
+            {openEditor ? (
               <div className="editor"></div>
             ) : (
               <ReactQuill
