@@ -1,9 +1,13 @@
 'use client'
 import { useState } from "react";
 import "./editor.css";
+import { useRouter } from 'next/navigation'
 
 let active = false;
 export default function CustomEditor(){ 
+
+	const router = useRouter();
+	const [data, setData] = useState("");
     function formatDoc(cmd, value = null) {
         if (value) {
             document.execCommand(cmd, false, value);
@@ -59,8 +63,17 @@ export default function CustomEditor(){
             html2pdf(content).save(filename.value);
         }
     }
+	function handleSave(){
+		const content = document.getElementById('content');
+		setData(content.innerHTML);  
+	}
+	function handleGenerate(){
+		const content = document.getElementById('content');
+		content.innerHTML = data;
+	}
     return (
-       	<div class="container">
+     
+		<>	 
 		<div class="toolbar">
 			<div class="head">
 				<input type="text" placeholder="Filename" value="untitled" id="filename"  disabled/>
@@ -118,9 +131,14 @@ export default function CustomEditor(){
 				<button id="show-code" data-active="false" onClick={()=>handleShowCode()}>&lt;/&gt;</button>
 			</div>
 		</div>
-		<div id="content" contenteditable="true" spellcheck="false" onMouseOver={()=>hanldeHoverMenu()} placeholder="Enter Your COE here ...">
+		<div id="content" contenteditable="true" spellcheck="false" onMouseOver={()=>hanldeHoverMenu()} style={{border: "1px solid black"}}>
 			
 		</div>
-	</div>
+		<div className="d-float pt-4">
+			<button className="btn btn-secondary float-end">Save</button>
+			<button className="btn btn-secondary float-end mx-1">Reset</button>
+			<button className="btn btn-secondary float-end" onClick={()=>router.push("/")}>Back to home</button>
+		</div>
+		</>
     )
 }

@@ -5,8 +5,9 @@ const { proxy } = require("valtio");
 
 export const globalState = proxy({
     baseurl : "http://localhost:8080/api",
-    activeTab: 0,
-    isAuthenticate : false
+    activeTab: '',
+    isAuthenticate : false,
+    addYours : false,
 })
 
 export const globalAction = {

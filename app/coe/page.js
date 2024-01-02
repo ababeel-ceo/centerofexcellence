@@ -1,85 +1,54 @@
 "use client";
-import "./coe.css";
-import dynamic from "next/dynamic";
-if (typeof window !== "undefined" && typeof window.navigator !== "undefined") {
-  import("react-quill/dist/quill.snow.css");
-}
-import { useRef, useState } from "react";
+import "./coe.css"; 
 import Navbar from "../components/Navbar";
 import CustomEditor from "../components/custom_editor";
+import { useState } from "react";
 
-const modules = {
-  toolbar: [
-    [{ header: "1" }, { header: "2" }, { header: "3" }, { font: [] }],
-    [{ size: [] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [
-      { list: "ordered" },
-      { list: "bullet" },
-      { indent: "-1" },
-      { indent: "+1" },
-    ],
-    ["link", "image", "video"],
-    ["clean"],
-  ],
-  clipboard: {
-    // toggle to add extra line breaks when pasting HTML:
-    matchVisual: false,
-  },
-};
-export default function CenterOfExcellence() {
-  const ReactQuill = dynamic(() => import("react-quill"), {
-    ssr: false,
-    //  loading: () => <p>Loading ...</p>,
-  });
-  const [value, setValue] = useState("");
-  const quillDataRef = useRef(null);
-
-  const handleSave = () => {
-    alert(JSON.stringify(value.getText()));
-  };
+export default function CenterOfExcellence() { 
+  const [title, setTitle] = useState("");
+  const [tag, setTag] = useState("");
+  const [desc, setDesc] = useState("");
+ 
   return (
-    <>
+    <div className="container">
       <div className="fixed-navbar">
         <Navbar />
       </div>
-
-      <div className="page-container ">
-        <div className="coe-container">
-          <div className="card-container">
-             <button
-              className="d-float float-end btn btn-primary mb-2"
-              onClick={() => handleSave()}
-            >
-              Save
-            </button>
-            <div className="card-header">
-              <div className="card-title">
-                <label htmlFor="">Title</label>
-                <input type="text" placeholder="Title" />
+      <div className="page-container">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-12">
+              <div class="form-floating m-2">
+                <input type="email" class="form-control" id="floatingInputGrid" placeholder="name@example.com" value={title} onChange={(e)=>setTitle(e.target.value)}/>
+                <label for="floatingInputGrid">Title</label>
               </div>
-              <div className="card-tag">
-                <label htmlFor="">Tag</label>
-                <input type="text" placeholder="# Tag" />
+              <div class="form-floating m-2">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="floatingInputValue"
+                  placeholder="#-tag"
+                  value={tag} onChange={(e)=>setTag(e.target.value)}
+                />
+                <label for="floatingInputValue"># - Tag</label>
+              </div>
+              <div class="form-floating m-2">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="floatingInputValue"
+                  placeholder="Description"
+                  value={desc} onChange={(e)=>setDesc(e.target.value)}
+                />
+                <label for="floatingInputValue">Short Description</label>
               </div>
             </div>
-            <label htmlFor="">Enter Your COE</label>
-
-            <div className="card-content-container">
-              {/* <ReactQuill
-                theme="snow"
-                value={value}
-                onChange={setValue}
-                onBlur={(e)=>setValue()}
-                className="editor"
-                modules={modules}
-              /> */}
+            <div className="col-md-12">
+              <CustomEditor />
             </div>
-            {JSON.stringify(value)}
-            <CustomEditor/>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

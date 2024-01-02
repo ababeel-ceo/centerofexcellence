@@ -54,7 +54,8 @@ export default function LoginPage() {
           <div className="input-controls"> 
             <button className="sbt-btn">Submit</button>
           </div>
-          <p style={{ padding: "5px" }}> Don't have an account <u onClick={()=>setLogin(false)} className="pointer">Register here</u>  </p>
+          <p style={{ padding: "5px 5px 0px 5px" }}> Don't have an account <u onClick={()=>setLogin(false)} className="pointer">Register here</u>  </p>
+          <p style={{ padding: "5px" }}> <u onClick={()=>router.push("/")} className="pointer"> Back to home </u>  </p>
         </form>
       </div> :
       <div className="back"> 
@@ -75,9 +76,10 @@ export default function LoginPage() {
             {/* <input type="submit" name="" id=""  className=""/> */}
             <button onClick={(e)=>handleRegister(e)} className="sbt-btn">Register</button>
           </div>
-          <p style={{ padding: "5px" }}>
+          <p style={{ padding: "5px 5px 0px 5px" }}>
             {" "}
             Already registered <u onClick={()=>setLogin(true)} className="pointer">Login here</u>
+          <p style={{ padding: "5px 5px 0px 0px" }}> <u onClick={()=>router.push("/")} className="pointer"> Back to home </u>  </p>
           </p>
         </form>
       </div>}

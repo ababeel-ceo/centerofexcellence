@@ -1,54 +1,20 @@
-'use client';
-import {useState } from "react"; 
-import LoginPage from "./LoginPage";
-import dynamic from "next/dynamic";
-
-if(typeof window !== 'undefined' && typeof window.navigator !== 'undefined'){
-  import ("react-quill/dist/quill.snow.css"); 
-}
-
-
-
-const Confetti = dynamic(()=>{
-  return import('react-confetti')
-},{ssr:false})
-
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-
-
-export default function LandingPage() {
-  const [value, setValue] = useState("");
-  const next = new Date().getSeconds() + 20;
-  const [openEditor, setopenEditor] = useState(false);
-
-  function handleAdd() {
-    setopenEditor(true);
-  }
-
+'use client'; 
+import LoginPage from "./LoginPage"; 
+import Navbar from "./components/Navbar";
+import PopperRibbon from "./components/PopperRibbon";
+export default function LandingPage() { 
+  const next = new Date().getSeconds() + 20; 
+ 
   return (
-    <>
-      {!openEditor ? (
+    <> <PopperRibbon/>
+    { false == false ?
         <div className="lp-container">
-          <Confetti
-            width={2000}
-            height={2000}
-            recycle={new Date().getSeconds() === next ? 1 : 0}
-          />
-          <div className="lp-nav"> 
-            <div className="nav-branding">Center Of Excellence</div>
-
-            <button
-              className="btn btn-secondary prj-btn"
-              onClick={() => handleAdd()}
-            >
-              Add Yours
-            </button>
-          </div>
+         
+          <Navbar/>
           <section className="hero-section">
             <div className="hero">CENTER OF EXCELLENCE</div>
             <div className="hero-sub">It's time to create your own WIKI</div>
           </section>
-          {!openEditor && (
             <section className="search-section">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -78,23 +44,10 @@ export default function LandingPage() {
                 <span> Search</span>
               </button>
             </section>
-          )}
-          <section className="editor-section">
-            {openEditor ? (
-              <div className="editor"></div>
-            ) : (
-              <ReactQuill
-                theme="snow"
-                value={value}
-                onChange={setValue}
-                className="editor"
-              />
-            )}
-          </section>
         </div>
-      ) : (
-        <LoginPage />
-      )}
+        :<LoginPage/>
+}
+
     </>
   );
 }
