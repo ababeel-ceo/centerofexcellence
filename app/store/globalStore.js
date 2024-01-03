@@ -5,7 +5,24 @@ const { proxy } = require("valtio");
 
 export const globalState = proxy({
     baseurl : "http://localhost:8080/api",
-    activeTab: '',
+    activeTab: 'coe',
+    menuTabs : [
+      {
+        id : 0,
+        name : 'home',
+        displayName : 'Home'
+      },
+      {
+        id : 1,
+        name : 'coe',
+        displayName : 'Coe'
+      },
+      {
+        id : 2,
+        name : 'todo',
+        displayName : 'Todo'
+      },
+    ],
     isAuthenticate : false,
     addYours : false,
 })

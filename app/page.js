@@ -7,9 +7,8 @@ export default function LandingPage() {
  
   return (
     <> <PopperRibbon/>
-    { false == false ?
+  
         <div className="lp-container">
-         
           <Navbar/>
           <section className="hero-section">
             <div className="hero">CENTER OF EXCELLENCE</div>
@@ -45,8 +44,7 @@ export default function LandingPage() {
               </button>
             </section>
         </div>
-        :<LoginPage/>
-}
+        
 
     </>
   );

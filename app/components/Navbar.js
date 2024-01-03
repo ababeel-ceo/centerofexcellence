@@ -7,8 +7,17 @@ import { useRouter } from 'next/navigation'
 export default function Navbar(){
   const router = useRouter()
   const snap = useSnapshot(globalState); 
-  const [addYours, setAddYours] = useState(true);
-  const menuTabs = ['Home', 'Coe', 'Todo']
+  const [addYours, setAddYours] = useState(true); 
+  const [isOpen, setIsopen] = useState(false);
+    function handleNavigate(tab){
+      if(tab.name === "home"){
+        router.push("/");
+      }else if(tab.name === "coe"){
+        router.push("/coe");
+      }else if(tab.name === "todo"){
+        router.push("/todo")
+      }
+    }
     function handleAdd(type) {
       if(type === 'addyours'){
         if(snap.isAuthenticate){
@@ -28,10 +37,14 @@ export default function Navbar(){
         <div className="nav-branding" style={{color : "white"}}>Center Of Excellence</div>
 
         <div className="d-flex">
-        {(snap.isAuthenticate ) && menuTabs.map((tab) => (
+        {(snap.isAuthenticate) && snap.menuTabs.map((tab) => (
           <div  className={`${
-            snap.activeTab === tab ? "hover-tab " : ""
-          }float-end  ps-3 pe-3 pointer menu`} onClick={()=>globalState.activeTab = tab} key={tab}>{tab}</div>
+            snap.activeTab === tab.name ?( tab.name === "home" ? "active-tab-home " : "active-tab ") : ""
+          } float-end  ps-3 pe-3 pointer menu`} 
+          onClick={()=>{
+            globalState.activeTab = tab.name;
+            handleNavigate(tab);
+          }} key={tab.id}>{tab.displayName}</div>
         ))}
         </div>
        

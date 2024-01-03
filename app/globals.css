@@ -215,10 +215,20 @@ width: 100%;
   border-radius: 18px;
   margin-top: 10px;;
 }
-.hover-tab{
+.active-tab{
   /* border-bottom: 5px solid gray; */
   background-color: gray;
   color: white;
+  margin : 0;
+  /* padding: 10px; */
+}
+.active-tab-home{
+  background-color: gray;
+  color: white;
+  margin : 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
 }
 .menu{
   /* border-bottom: 5px solid white; */
